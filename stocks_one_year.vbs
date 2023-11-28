@@ -1,15 +1,15 @@
 Sub stocks_one_year()
     
     'define columns
-    range("I1").Value = "Ticker"
-    range("J1").Value = "Yearly Change"
-    range("K1").Value = "Percent Change"
-    range("L1").Value = "Total Stock Volume"
-    range("P1").Value = "Ticker"
-    range("Q1").Value = "Value"
-    range("O2").Value = "Greatest % Increase"
-    range("O3").Value = "Greatest % Decrease"
-    range("O4").Value = "Greatest total Volume"
+    Range("I1").Value = "Ticker"
+    Range("J1").Value = "Yearly Change"
+    Range("K1").Value = "Percent Change"
+    Range("L1").Value = "Total Stock Volume"
+    Range("P1").Value = "Ticker"
+    Range("Q1").Value = "Value"
+    Range("O2").Value = "Greatest % Increase"
+    Range("O3").Value = "Greatest % Decrease"
+    Range("O4").Value = "Greatest total Volume"
     
     'declare variables
     Dim Ticker_Symbol As String
@@ -23,9 +23,12 @@ Sub stocks_one_year()
     Dim greatest_decrease As Double
     Dim greatest_increase As Double
     Dim greatest_volume As Double
-    Dim greatest_decrease_ticker As String
-    Dim greatest_increase_ticker As String
-    Dim greatest_volume_ticker As String
+    Dim cell_decrease As Object
+    Dim cell_increase As Object
+    Dim cell_volume As Object
+    Dim greatest_decrease_ticker As Object
+    Dim greatest_increase_ticker As Object
+    Dim greatest_volume_ticker As Object
 
      'set initial values of variables
     Summary_Row = 2
@@ -52,10 +55,10 @@ Sub stocks_one_year()
             opening_price_index = i + 1
             
                 'populating cells with values
-            range("I" & Summary_Row).Value = Ticker_Symbol
-            range("J" & Summary_Row).Value = yearly_change
-            range("K" & Summary_Row).Value = percent_change
-            range("L" & Summary_Row).Value = Stock_Total_Volume
+            Range("I" & Summary_Row).Value = Ticker_Symbol
+            Range("J" & Summary_Row).Value = yearly_change
+            Range("K" & Summary_Row).Value = percent_change
+            Range("L" & Summary_Row).Value = Stock_Total_Volume
 
                 'moving to next row
             Summary_Row = Summary_Row + 1
@@ -74,41 +77,41 @@ Sub stocks_one_year()
     Next i
     
     'find the largest value and the smallest value
-    Set range_percent = ActiveSheet.range("K:K")
+    range_percent = ActiveSheet.Range("K:K")
     greatest_decrease = Application.WorksheetFunction.Min(range_percent)
     greatest_increase = Application.WorksheetFunction.Max(range_percent)
     
       'find largest value volume
-    Set range_volume = ActiveSheet.range("L:L")
+  range_volume = ActiveSheet.Range("L:L")
     greatest_volume = Application.WorksheetFunction.Max(range_volume)
     
       'locate cell with smallest number and find ticker associated
-    Set cell_decrease = Cells.Find(greatest_decrease)
-    greatest_decrease_ticker = cell_decrease.Offset(0, -2)
+   Set cell_decrease = Cells.Find(greatest_decrease)
+    Set greatest_decrease_ticker = cell_decrease.Offset(0, -2)
 
       'locate cell with largest number and find ticker associated
-    Set cell_increase = Cells.Find(greatest_increase)
-    greatest_increase_ticker = cell_increase.Offset(0, -2)
+ Set cell_increase = Cells.Find(greatest_increase)
+    Set greatest_increase_ticker = cell_increase.Offset(0, -2)
      
         'locate cell with largest volume number and find ticker associated
-    Set cell_volume = Cells.Find(greatest_volume)
-    greatest_volume_ticker = cell_volume.Offset(0, -3)
+  Set cell_volume = Cells.Find(greatest_volume)
+    Set greatest_volume_ticker = cell_volume.Offset(0, -3)
      
      'populate cells with values
-    range("Q3").Value = greatest_decrease
-    range("Q2").Value = greatest_increase
-    range("Q4").Value = greatest_volume
+    Range("Q3").Value = greatest_decrease
+    Range("Q2").Value = greatest_increase
+    Range("Q4").Value = greatest_volume
     
-    range("P2").Value = greatest_increase_ticker
-    range("P3").Value = greatest_decrease_ticker
-    range("P4").Value = greatest_volume_ticker
+    Range("P2").Value = greatest_increase_ticker
+    Range("P3").Value = greatest_decrease_ticker
+    Range("P4").Value = greatest_volume_ticker
     
      'find last row in columns J and K
     j_lastrow = Cells(Rows.Count, "J").End(xlUp).Row
     k_lastrow = Cells(Rows.Count, "K").End(xlUp).Row
     
       'loop through column J and set conditional formatting
-    For Each cell In range("J2:J" & j_lastrow)
+    For Each cell In Range("J2:J" & j_lastrow)
         If cell.Value < 0 Then
             cell.Interior.ColorIndex = 3
         ElseIf cell.Value > 0 Then
@@ -119,7 +122,7 @@ Sub stocks_one_year()
     Next cell
         
        'loop through column K and set conditional formatting
-     For Each cell In range("K2:K" & k_lastrow)
+     For Each cell In Range("K2:K" & k_lastrow)
         If cell.Value < 0 Then
             cell.Interior.ColorIndex = 3
         ElseIf cell.Value > 0 Then
