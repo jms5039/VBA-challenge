@@ -25,9 +25,13 @@ Sub stocks_all_years()
     Dim greatest_decrease As Double
     Dim greatest_increase As Double
     Dim greatest_volume As Double
-    Dim greatest_decrease_ticker As String
-    Dim greatest_increase_ticker As String
-    Dim greatest_volume_ticker As String
+    Dim cell_decrease As Object
+    Dim cell_increase As Object
+    Dim cell_volume As Object
+    Dim greatest_decrease_ticker As Object
+    Dim greatest_increase_ticker As Object
+    Dim greatest_volume_ticker As Object
+
 
     'set initial values of variables
     Summary_Row = 2
@@ -86,15 +90,15 @@ Sub stocks_all_years()
     
     'locate cell with smallest number and find ticker associated
     Set cell_decrease = ws.Cells.Find(greatest_decrease)
-    greatest_decrease_ticker = cell_decrease.Offset(0, -2)
+    Set greatest_decrease_ticker = cell_decrease.Offset(0, -2)
 
     'locate cell with largest number and find ticker associated
     Set cell_increase = ws.Cells.Find(greatest_increase)
-    greatest_increase_ticker = cell_increase.Offset(0, -2)
+    Set greatest_increase_ticker = cell_increase.Offset(0, -2)
      
      'locate cell with largest volume number and find ticker associated
     Set cell_volume = ws.Cells.Find(greatest_volume)
-    greatest_volume_ticker = cell_volume.Offset(0, -3)
+   Set greatest_volume_ticker = cell_volume.Offset(0, -3)
      
     'populate cells with values
     ws.range("Q3").Value = greatest_decrease
