@@ -77,12 +77,12 @@ Sub stocks_one_year()
     Next i
     
     'find the largest value and the smallest value
-    range_percent = ActiveSheet.Range("K:K")
+   Set range_percent = ActiveSheet.Range("K:K")
     greatest_decrease = Application.WorksheetFunction.Min(range_percent)
     greatest_increase = Application.WorksheetFunction.Max(range_percent)
     
       'find largest value volume
-  range_volume = ActiveSheet.Range("L:L")
+ Set range_volume = ActiveSheet.Range("L:L")
     greatest_volume = Application.WorksheetFunction.Max(range_volume)
     
       'locate cell with smallest number and find ticker associated
